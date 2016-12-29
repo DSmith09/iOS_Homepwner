@@ -26,4 +26,10 @@ class ItemStore {
     open static func createAndAddItem() -> Void {
         allItems.append(Item(random: true))
     }
+    
+    open static func getCount() -> Int {
+        return allItems.count
+    }
+    
+    // TODO: Add Static Initializer to store 5 elements in Array
 }
