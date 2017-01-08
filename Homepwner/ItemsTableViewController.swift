@@ -12,7 +12,7 @@ class ItemsTableViewController: UITableViewController {
     // TableView DataSource - Injected with Dependency Inversion - See AppDelegate.Swift
     var itemStore: ItemStore!
     
-    private let REUSE_IDENTIFIER: String! = "UITableViewCell"
+    private let REUSE_IDENTIFIER: String! = "ItemViewCell"
     private let NO_MORE_ITEMS: String! = "No more Items!"
     
     private let EDIT: String! = "Edit"
@@ -22,6 +22,8 @@ class ItemsTableViewController: UITableViewController {
     private let REMOVE: String! = "Remove"
     private let CANCEL: String! = "Cancel"
     private let EMPTY_STRING: String! = ""
+    
+    private let ROW_HEIGHT: CGFloat! = 65
     
     @IBAction func addNewItem(sender: AnyObject) {
         // Add a new item to the ItemStore
@@ -55,6 +57,8 @@ class ItemsTableViewController: UITableViewController {
         tableView.contentInset = insets
         // This one sets the View for Scrolling
         tableView.scrollIndicatorInsets = insets
+        
+        tableView.estimatedRowHeight = ROW_HEIGHT
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -81,18 +85,19 @@ class ItemsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: REUSE_IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: REUSE_IDENTIFIER, for: indexPath) as! ItemViewCell
+        cell.updateLabels()
         if indexPath.row == itemStore.getCount() {
-            cell.textLabel?.text = NO_MORE_ITEMS
-            cell.detailTextLabel?.text = EMPTY_STRING
+            cell.nameLabel.text = NO_MORE_ITEMS
+            cell.serialNumberLabel.text = EMPTY_STRING
+            cell.valueLabel.text = EMPTY_STRING
             return cell
         }
         // Configure the cell...
         let item = itemStore.getItemAtIndex(index: indexPath.row)
-        
-        cell.textLabel?.text = item.getName()
-        cell.detailTextLabel?.text = item.getValue()
-        
+        cell.nameLabel.text = item.getName()
+        cell.serialNumberLabel.text = item.getSerialNumber()
+        cell.valueLabel.text = item.getValue()
         return cell
     }
     

@@ -9,7 +9,10 @@
 import UIKit
 
 class ItemViewCell: UITableViewCell {
-
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var serialNumberLabel: UILabel!
+    @IBOutlet var valueLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +22,15 @@ class ItemViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    // Support for Dynamic Type Accessibility
+    open func updateLabels() -> Void {
+        let bodyFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        let caption1Font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)
+        nameLabel.font = bodyFont
+        valueLabel.font = bodyFont
+        serialNumberLabel.font = caption1Font
     }
 
 }

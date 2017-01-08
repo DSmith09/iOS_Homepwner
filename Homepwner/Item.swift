@@ -9,13 +9,13 @@ import Foundation
 
 class Item : NSObject {
     private let name : String!
-    private let valueInDollars : Int!
+    private let valueInDollars : Float!
     private let serialNumber : String?
     private let dateCreated : NSDate!
     private let numberFormatter : NumberFormatter! = NumberFormatter()
     
     // Default Ctor
-    init(name: String, valueInDollars: Int, serialNumber: String?) {
+    init(name: String, valueInDollars: Float, serialNumber: String?) {
         self.name = name
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
@@ -35,7 +35,7 @@ class Item : NSObject {
             let randomNoun = nouns[Int(arc4random_uniform(UInt32(nouns.count)))]
             
             let randomName = "\(randomAdjective) \(randomNoun)"
-            let randomValue = Int(arc4random_uniform(100))
+            let randomValue = Float(arc4random_uniform(100))
             let randomSerial = NSUUID.init().uuidString.components(separatedBy: "-").first!
             
             self.init(name: randomName, valueInDollars: randomValue, serialNumber: randomSerial)
