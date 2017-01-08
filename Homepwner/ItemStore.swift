@@ -10,26 +10,45 @@ import UIKit
 
 // Utility Class for Creating/Storing Items
 class ItemStore {
-    private static var allItems = [Item]()
+    private var allItems = [Item]()
     
     // Utility Method to Create New Item
-    open static func createItem() -> Item {
+    open func createItem() -> Item {
         return Item(random: true)
     }
     
     // Utility Method to Add New Item to Datastore
-    open static func addItem(item: Item) -> Void {
+    open func addItem(item: Item) -> Void {
         allItems.append(item)
     }
     
     // Utility Method to Create AND Add New Item to Datastore
-    open static func createAndAddItem() -> Void {
+    open func createAndAddItem() -> Void {
         allItems.append(Item(random: true))
     }
     
-    open static func getCount() -> Int {
+    open func getCount() -> Int {
         return allItems.count
     }
     
-    // TODO: Add Static Initializer to store 5 elements in Array
+    open func getItemAtIndex(index: Int) -> Item {
+        return allItems[index]
+    }
+    
+    open func getIndexOfItem(item: Item) -> Int? {
+        return allItems.index(of: item)
+    }
+    
+    open func removeItem(item: Item) -> Void {
+        allItems.remove(at: getIndexOfItem(item: item)!)
+    }
+    
+    open func moveItemAtIndex(fromIndex: Int, toIndex: Int) -> Void {
+        if fromIndex == toIndex {
+            return
+        }
+        let movedItem = getItemAtIndex(index: fromIndex)
+        removeItem(item: movedItem)
+        allItems.insert(movedItem, at: toIndex)
+    }
 }

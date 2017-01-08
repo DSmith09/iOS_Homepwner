@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Dependency Injection - Like Spring Injection
+        let itemController = window!.rootViewController as! ItemsTableViewController
+        itemController.itemStore = ItemStore()
+        // TODO: See if there's a better way to do Dependency Injection in iOS
         return true
     }
 
