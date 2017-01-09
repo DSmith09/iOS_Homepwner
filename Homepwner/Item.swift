@@ -8,11 +8,26 @@
 import Foundation
 
 class Item : NSObject {
-    private let name : String!
-    private let valueInDollars : Float!
-    private let serialNumber : String?
-    private let dateCreated : NSDate!
-    private let numberFormatter : NumberFormatter! = NumberFormatter()
+    private var name: String!
+    private var valueInDollars: Float!
+    private var serialNumber: String?
+    private let dateCreated: NSDate!
+    
+    private let numberFormatter: NumberFormatter! = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = NSLocale.current
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+    
+    private let dateFormatter: DateFormatter! = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
     
     // Default Ctor
     init(name: String, valueInDollars: Float, serialNumber: String?) {
@@ -20,8 +35,6 @@ class Item : NSObject {
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
         self.dateCreated = NSDate()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.locale = NSLocale.current
         super.init()
     }
     
@@ -46,11 +59,11 @@ class Item : NSObject {
     }
     
     // Getters
-    open func getName() -> String {
+    open func getName() -> String! {
         return name
     }
     
-    open func getValue() -> String {
+    open func getValue() -> String! {
         return numberFormatter.string(from: valueInDollars as NSNumber)!
     }
     
@@ -58,7 +71,32 @@ class Item : NSObject {
         return serialNumber
     }
     
-    open func getDateCreated() -> NSDate {
-        return dateCreated
+    open func getDateCreated() -> String! {
+        return dateFormatter.string(from: dateCreated as Date)
+    }
+    
+    // Setters
+    open func setName(name: String?) -> Void {
+        if name == nil {
+            self.name = ""
+        } else {
+          self.name = name!
+        }
+    }
+    
+    open func setValue(value: String?) -> Void {
+        if let valueText = numberFormatter.number(from: value!) {
+            self.valueInDollars = valueText as Float
+        } else {
+            self.valueInDollars = 0
+        }
+    }
+    
+    open func setSerialNumber(serialNumber: String?) {
+        if serialNumber == nil {
+            self.serialNumber = ""
+        } else {
+            self.serialNumber = serialNumber
+        }
     }
 }

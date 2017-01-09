@@ -25,6 +25,8 @@ class ItemsTableViewController: UITableViewController {
     
     private let ROW_HEIGHT: CGFloat! = 65
     
+    private let ITEM_DETAILS_SEGUE: String! = "ItemDetails"
+    
     @IBAction func addNewItem(sender: AnyObject) {
         // Add a new item to the ItemStore
         let newItem = itemStore.createItem()
@@ -64,6 +66,12 @@ class ItemsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -168,14 +176,21 @@ class ItemsTableViewController: UITableViewController {
     }
  
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == ITEM_DETAILS_SEGUE {
+            let row = tableView.indexPathForSelectedRow?.row
+            if row == itemStore.getCount() {
+                return
+            }
+            let item = itemStore.getItemAtIndex(index: row!)
+            let itemDetailViewController = segue.destination as! ItemDetailViewController
+            itemDetailViewController.item = item
+        }
     }
-    */
-
 }

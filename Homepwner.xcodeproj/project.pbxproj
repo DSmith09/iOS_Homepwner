@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ABA1A1441E22ECDD00B63209 /* ItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1A1431E22ECDD00B63209 /* ItemViewCell.swift */; };
+		ABA1A1461E23455800B63209 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1A1451E23455800B63209 /* ItemDetailViewController.swift */; };
 		ABF8D51D1E156BFE000BB971 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D51C1E156BFE000BB971 /* AppDelegate.swift */; };
 		ABF8D5221E156BFE000BB971 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABF8D5201E156BFE000BB971 /* Main.storyboard */; };
 		ABF8D5241E156BFE000BB971 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABF8D5231E156BFE000BB971 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		ABA1A1431E22ECDD00B63209 /* ItemViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewCell.swift; sourceTree = "<group>"; };
+		ABA1A1451E23455800B63209 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		ABF8D5191E156BFE000BB971 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABF8D51C1E156BFE000BB971 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABF8D5211E156BFE000BB971 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				ABF8D52E1E156CB4000BB971 /* ItemsTableViewController.swift */,
 				ABF8D51C1E156BFE000BB971 /* AppDelegate.swift */,
 				ABF8D5201E156BFE000BB971 /* Main.storyboard */,
+				ABA1A1451E23455800B63209 /* ItemDetailViewController.swift */,
 				ABF8D5231E156BFE000BB971 /* Assets.xcassets */,
 				ABF8D5281E156BFE000BB971 /* Info.plist */,
 				ABF8D5301E156D7A000BB971 /* Item.swift */,
@@ -144,6 +147,7 @@
 			files = (
 				ABA1A1441E22ECDD00B63209 /* ItemViewCell.swift in Sources */,
 				ABF8D51D1E156BFE000BB971 /* AppDelegate.swift in Sources */,
+				ABA1A1461E23455800B63209 /* ItemDetailViewController.swift in Sources */,
 				ABF8D5311E156D7A000BB971 /* Item.swift in Sources */,
 				ABF8D5331E157319000BB971 /* ItemStore.swift in Sources */,
 				ABF8D52F1E156CB4000BB971 /* ItemsTableViewController.swift in Sources */,
