@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB950FB51E25ED6A00081FFC /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB950FB41E25ED6A00081FFC /* ImageStore.swift */; };
 		ABA1A1441E22ECDD00B63209 /* ItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1A1431E22ECDD00B63209 /* ItemViewCell.swift */; };
 		ABA1A1461E23455800B63209 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1A1451E23455800B63209 /* ItemDetailViewController.swift */; };
 		ABF8D51D1E156BFE000BB971 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8D51C1E156BFE000BB971 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB950FB41E25ED6A00081FFC /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		ABA1A1431E22ECDD00B63209 /* ItemViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewCell.swift; sourceTree = "<group>"; };
 		ABA1A1451E23455800B63209 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		ABF8D5191E156BFE000BB971 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +66,7 @@
 				ABF8D51C1E156BFE000BB971 /* AppDelegate.swift */,
 				ABF8D5201E156BFE000BB971 /* Main.storyboard */,
 				ABA1A1451E23455800B63209 /* ItemDetailViewController.swift */,
+				AB950FB41E25ED6A00081FFC /* ImageStore.swift */,
 				ABF8D5231E156BFE000BB971 /* Assets.xcassets */,
 				ABF8D5281E156BFE000BB971 /* Info.plist */,
 				ABF8D5301E156D7A000BB971 /* Item.swift */,
@@ -150,6 +153,7 @@
 				ABA1A1461E23455800B63209 /* ItemDetailViewController.swift in Sources */,
 				ABF8D5311E156D7A000BB971 /* Item.swift in Sources */,
 				ABF8D5331E157319000BB971 /* ItemStore.swift in Sources */,
+				AB950FB51E25ED6A00081FFC /* ImageStore.swift in Sources */,
 				ABF8D52F1E156CB4000BB971 /* ItemsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

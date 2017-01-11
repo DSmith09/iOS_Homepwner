@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navController = window!.rootViewController as! UINavigationController
         let itemController = navController.topViewController as! ItemsTableViewController
         itemController.itemStore = ItemStore()
+        itemController.imageStore = ImageStore()
         // TODO: See if there's a better way to do Dependency Injection in iOS
         return true
     }

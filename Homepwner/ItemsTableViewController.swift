@@ -11,6 +11,7 @@ import UIKit
 class ItemsTableViewController: UITableViewController {
     // TableView DataSource - Injected with Dependency Inversion - See AppDelegate.Swift
     var itemStore: ItemStore!
+    var imageStore: ImageStore!
     
     private let REUSE_IDENTIFIER: String! = "ItemViewCell"
     private let NO_MORE_ITEMS: String! = "No more Items!"
@@ -27,6 +28,11 @@ class ItemsTableViewController: UITableViewController {
     
     private let ITEM_DETAILS_SEGUE: String! = "ItemDetails"
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
     @IBAction func addNewItem(sender: AnyObject) {
         // Add a new item to the ItemStore
         let newItem = itemStore.createItem()
@@ -39,26 +45,15 @@ class ItemsTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func toggleEditingMode(sender: AnyObject) {
-        // Using the isEditing property on UITableViewController for editing table view
-        if self.isEditing {
-            sender.setTitle(EDIT, for: .normal)
-            setEditing(false, animated: true)
-        } else {
-            sender.setTitle(DONE, for: .normal)
-            setEditing(true, animated: true)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Content Insets - Dynamic Inset for other attributes on the device (e.g. the status bar)
+       /* // Content Insets - Dynamic Inset for other attributes on the device (e.g. the status bar)
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
         // This one sets the View Initially
         tableView.contentInset = insets
         // This one sets the View for Scrolling
-        tableView.scrollIndicatorInsets = insets
+        tableView.scrollIndicatorInsets = insets */
         
         tableView.estimatedRowHeight = ROW_HEIGHT
         // Uncomment the following line to preserve selection between presentations
@@ -124,7 +119,7 @@ class ItemsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let itemToDelete = itemStore.getItemAtIndex(index: indexPath.row)
-            let title = "Remove \(itemToDelete.getName())"
+            let title = "Remove \(itemToDelete.getName()!)"
             let message = REMOVE_MESSAGE
             
             let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -135,11 +130,16 @@ class ItemsTableViewController: UITableViewController {
                 (action) in
                 // Delete the row from the View and the ItemStore
                 self.itemStore.removeItem(item: itemToDelete)
+                self.imageStore.deleteImageForKey(key: itemToDelete.getItemKey())
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             })
             ac.addAction(cancelAction)
             ac.addAction(deleteAction)
             
+            // Needed for iPad Implementation
+            if let popoverController = ac.popoverPresentationController {
+                popoverController.sourceView = self.view
+            }
             // Present the Alert View on the TableView
             present(ac, animated: true, completion: nil)
         } else if editingStyle == .insert {
@@ -191,6 +191,7 @@ class ItemsTableViewController: UITableViewController {
             let item = itemStore.getItemAtIndex(index: row!)
             let itemDetailViewController = segue.destination as! ItemDetailViewController
             itemDetailViewController.item = item
+            itemDetailViewController.imageStore = imageStore
         }
     }
 }

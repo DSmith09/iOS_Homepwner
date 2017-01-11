@@ -12,6 +12,7 @@ class Item : NSObject {
     private var valueInDollars: Float!
     private var serialNumber: String?
     private let dateCreated: NSDate!
+    private let itemKey: String!
     
     private let numberFormatter: NumberFormatter! = {
         let formatter = NumberFormatter()
@@ -35,6 +36,7 @@ class Item : NSObject {
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
         self.dateCreated = NSDate()
+        self.itemKey = UUID().uuidString
         super.init()
     }
     
@@ -73,6 +75,10 @@ class Item : NSObject {
     
     open func getDateCreated() -> String! {
         return dateFormatter.string(from: dateCreated as Date)
+    }
+    
+    open func getItemKey() -> String! {
+        return itemKey
     }
     
     // Setters
