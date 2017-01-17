@@ -11,7 +11,19 @@ import UIKit
 // Utility Class for Creating/Storing Items
 class ItemStore {
     private var allItems = [Item]()
+    private let itemArchiveURL: NSURL = {
+        // NOTE: iOS always uses .userDomainMask as SearchFileMask, MacOSX can vary
+        let documentDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = documentDirectories.first!
+        return documentDirectory.appendingPathComponent("items.archives") as NSURL
+    }()
     
+    // MARK: Init
+    init() {
+        if let archivedItems = NSKeyedUnarchiver.unarchiveObject(withFile: itemArchiveURL.path!) as? [Item] {
+            allItems += archivedItems
+        }
+    }
     // Utility Method to Create New Item
     open func createItem() -> Item {
         return Item(random: true)
@@ -50,5 +62,12 @@ class ItemStore {
         let movedItem = getItemAtIndex(index: fromIndex)
         removeItem(item: movedItem)
         allItems.insert(movedItem, at: toIndex)
+    }
+    
+    // MARK: Persist Data
+    open func saveChanges() -> Bool {
+        let urlPath = itemArchiveURL.path!
+        print("Saving items to: \(urlPath)")
+        return NSKeyedArchiver.archiveRootObject(allItems, toFile: urlPath)
     }
 }

@@ -12,15 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    let itemStore: ItemStore! = ItemStore()
+    let imageStore: ImageStore! = ImageStore()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Dependency Injection - Like Spring Injection
         let navController = window!.rootViewController as! UINavigationController
         let itemController = navController.topViewController as! ItemsTableViewController
-        itemController.itemStore = ItemStore()
-        itemController.imageStore = ImageStore()
+        itemController.itemStore = itemStore
+        itemController.imageStore = imageStore
         // TODO: See if there's a better way to do Dependency Injection in iOS
         return true
     }
@@ -33,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        if itemStore.saveChanges() {
+            print("Saved all of the Items")
+        } else {
+            print("Could not save all of the Items")
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

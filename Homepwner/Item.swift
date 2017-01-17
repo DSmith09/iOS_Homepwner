@@ -7,13 +7,22 @@
 //
 import Foundation
 
-class Item : NSObject {
+class Item : NSObject, NSCoding {
+    // MARK: Properties
     private var name: String!
     private var valueInDollars: Float!
     private var serialNumber: String?
     private let dateCreated: NSDate!
     private let itemKey: String!
     
+    // MARK: Constants
+    private let NAME_KEY: String! = "name"
+    private let VALUE_KEY: String! = "valueInDollars"
+    private let SERIAL_NUMBER_KEY: String! = "serialNumber"
+    private let DATE_CREATED_KEY: String! = "dateCreated"
+    private let ITEM_KEY_KEY: String! = "itemKey"
+    
+    // MARK: Formatters
     private let numberFormatter: NumberFormatter! = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -30,6 +39,7 @@ class Item : NSObject {
         return formatter
     }()
     
+    // MARK: Ctors
     // Default Ctor
     init(name: String, valueInDollars: Float, serialNumber: String?) {
         self.name = name
@@ -60,7 +70,18 @@ class Item : NSObject {
         }
     }
     
-    // Getters
+    // Required Ctor fior DeArchiving
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObject(forKey: NAME_KEY) as! String
+        self.valueInDollars = aDecoder.decodeFloat(forKey: VALUE_KEY)
+        self.dateCreated = aDecoder.decodeObject(forKey: DATE_CREATED_KEY) as! NSDate
+        self.serialNumber = aDecoder.decodeObject(forKey: SERIAL_NUMBER_KEY) as? String
+        self.itemKey = aDecoder.decodeObject(forKey: ITEM_KEY_KEY) as! String
+        
+        super.init()
+    }
+    
+    // MARK: Getters
     open func getName() -> String! {
         return name
     }
@@ -81,7 +102,7 @@ class Item : NSObject {
         return itemKey
     }
     
-    // Setters
+    // MARK: Setters
     open func setName(name: String?) -> Void {
         if name == nil {
             self.name = ""
@@ -104,5 +125,14 @@ class Item : NSObject {
         } else {
             self.serialNumber = serialNumber
         }
+    }
+    
+    // MARK: Archiving
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: NAME_KEY)
+        aCoder.encode(valueInDollars, forKey: VALUE_KEY)
+        aCoder.encode(serialNumber, forKey: SERIAL_NUMBER_KEY)
+        aCoder.encode(dateCreated, forKey: DATE_CREATED_KEY)
+        aCoder.encode(itemKey, forKey: ITEM_KEY_KEY)
     }
 }
