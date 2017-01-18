@@ -24,7 +24,7 @@ class ImageStore {
         if let existingImage = cache.object(forKey: key as NSString) {
             return existingImage
         }
-        return loadDefaultImage(key: <#T##String#>)
+        return loadDefaultImage(key: key)
     }
     
     open func deleteImageForKey(key: String) -> Void {
